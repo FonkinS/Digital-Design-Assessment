@@ -1,0 +1,28 @@
+#root {
+    height: 100%;
+}
+/*https://www.w3schools.com/csS/css_align.asp*/
+.Menu {
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MenuItemsContainer {
+    display: flex;
+    flex-direction:column;
+}
+
+.MenuItem {
+    height: 50px;
+    margin:25px;
+}
+
+/*https://stackoverflow.com/questions/5721904/make-body-fill-entire-screen*/
+html, body {
+    margin: 0;
+    height: 100%;
+}
