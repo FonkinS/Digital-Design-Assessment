@@ -1,29 +1,17 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+
 import Menu from './Menu.js'
+import InsertName from './InsertName.js'
 
-function App() {
-    /*const [data, setData] = React.useState("Not Fetched");
-    const [value, setValue] = React.useState("null")
-
-    React.useEffect(() => {
-        fetch("hello?key="+value, {method:"get"})
-            .then((response) => response.text())
-            .then((text) => {
-                setData(text);
-            });
-    });*/
-
-    /*React.useEffect(() => {
-        fetch("/hello")
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data.thing); 
-                console.log(data.thing)
-            });
-    }, []);*/
-
-    return <Menu />;
+function App() { 
+    return (
+        <Routes>
+            <Route path="/" element={<Menu />} />
+            <Route path="/insert-name" element={<InsertName />} />
+        </Routes>
+    );
 }
 
 export default App;

@@ -2,27 +2,66 @@
     height: 100%;
 }
 /*https://www.w3schools.com/csS/css_align.asp*/
-.Menu {
+.Center {
     min-height: 100%;
     width: 100%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #8AA8A1;
 }
 
-.MenuItemsContainer {
+.VerticalContainer {
     display: flex;
     flex-direction:column;
 }
 
+/*
+#885A89
+#8AA8A1
+#CBCBD4
+#D1B490
+#EE7B30
+*/
+
+
 .MenuItem {
-    height: 50px;
-    margin:25px;
+    margin:60px;
+    padding: 20px;
+    min-width: 300px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #B19470;
+    border-style: solid;
+    background-color: #D1B490; 
+}
+.MenuItem:hover {
+    background-color: #C1A480;
+}
+.MenuItem:active {
+    color: #666;
+}
+
+.TextInput {
+    height:50px;
+    font-size: 20pt;
+    font-family: 'Trebuchet MS';
+    text-align:center;
+}
+
+.Heading {
+    text-align: center;
+    font-size: 28pt;
+    margin: 30px;
 }
 
 /*https://stackoverflow.com/questions/5721904/make-body-fill-entire-screen*/
 html, body {
     margin: 0;
     height: 100%;
+    background-color: #8AA8A1;
+    font-family: 'Trebuchet MS';
+    font-size: 24pt;
+
 }
