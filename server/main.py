@@ -7,9 +7,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) # enables CORS
 
-@app.route("/hello")
-def hello():
-    return "You're Dumb: " + str(request.args.get('key'))
+@app.route("/joinGame")
+def joinGame():
+    return "You're Dumb: "
 
 """
 s = CREATE TABLE IF NOT EXISTS tab (

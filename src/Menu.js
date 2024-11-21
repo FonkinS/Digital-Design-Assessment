@@ -4,13 +4,10 @@ import './style.css';
 
 function Menu() {
     const nav = useNavigate();
-    function handleClick() {
-        nav("/insert-name");
-    }
     return <div className="Center">
         <div className="VerticalContainer">
-            <button className="MenuItem" onClick={handleClick}>Join Game</button>
-            <button className="MenuItem">Start Game</button>
+            <button className="MenuItem" onClick={() => nav("/insert-code")}>Join Game</button>
+            <button className="MenuItem" onClick={() => nav("/insert-name")}>Start Game</button>
         </div>
     </div>;
 }

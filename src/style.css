@@ -35,6 +35,8 @@
     border-color: #B19470;
     border-style: solid;
     background-color: #D1B490; 
+    font-family: 'Trebuchet MS';
+    font-size: 24pt;
 }
 .MenuItem:hover {
     background-color: #C1A480;
