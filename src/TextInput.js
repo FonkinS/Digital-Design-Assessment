@@ -6,7 +6,9 @@ function TextInput({enterPressedHandler, type}) {
     /*https://stackoverflow.com/questions/27827234/how-to-handle-the-onkeypress-event-in-reactjs*/
     const eventHandler = (event) => {
         if (event.key === "Enter") {
-            enterPressedHandler(event.target.value);
+            const value = event.target.value;
+            event.target.value = "";
+            enterPressedHandler(value);
         };
     }
     return (

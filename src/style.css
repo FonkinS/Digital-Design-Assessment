@@ -58,6 +58,16 @@
     margin: 30px;
 }
 
+.GameCode {
+    text-align: center;
+    background-color: #D1B490;
+    margin: 30px;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 30px;
+}
+
 /*https://stackoverflow.com/questions/5721904/make-body-fill-entire-screen*/
 html, body {
     margin: 0;

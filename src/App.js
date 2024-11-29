@@ -1,10 +1,13 @@
-import React from 'react';
+import {React, useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './App.css';
 
 import Menu from './Menu.js'
 import TextInput from './TextInput.js'
+import Question from './Question.js'
+import Lobby from './Lobby.js'
 
 
 async function callServer(functionName, parameters) {
@@ -13,46 +16,57 @@ async function callServer(functionName, parameters) {
         url += String(key) + "=" + String(value) + "&";
     }
     console.log(url);
-    const response = await fetch(url)
-        .then((response) => {return response.text();});
-    return response;
+    const response = await fetch(url);
+    return response.text();
 }
 
-function startGame() {
-
+async function startGame(nav) {
+    const output = await callServer("startGame", {name: Cookies.get("name")});
+    if (output === "ERROR") {
+        alert("ERROR!");
+        nav("/");
+    } else {
+        Cookies.set("player_id", output.split(" ")[0]);
+        Cookies.set("gameCode", output.split(" ")[1]);
+        nav("/lobby");
+    }
 }
 
-function joinGame(name, gameCode) {
-    console.log("hi");
-    const output = callServer("joinGame", {thisname: name, code: gameCode});
-    console.log(output);
+async function joinGame(nav) {
+    const output = await callServer("joinGame", {name: Cookies.get("name"), code: Cookies.get("gameCode")});
+    if (output == "ERROR") {
+        alert("ERROR!");
+        nav("/");
+    } else {
+        Cookies.set("player_id", output);
+        nav("/lobby")
+    }
 }
 
 
 function App() { 
-    var gameCode;
-    var name;
-    var isAdmin = true;
-
-    console.log("hui");
 
     const nav = useNavigate();
-
     const gameCodeEntered = (code) => {
-        isAdmin = false;
-        gameCode = code;
+        Cookies.set("isAdmin", false);
+        Cookies.set("gameCode", code);
         nav("/insert-name");
     };
-    const nameEntered = (n) => {
-        name = n;
-        console.log("hi");
-        joinGame(name, gameCode);
+    const nameEntered = (name) => {
+        Cookies.set("name", name);
+        if (Cookies.get("isAdmin") === "true") {
+            startGame(nav);
+        } else {
+            joinGame(nav);
+        }
     }
     return (
         <Routes>
             <Route path="/" element={<Menu />} />
             <Route path="/insert-name" element={<TextInput enterPressedHandler={nameEntered} type="Name"/>} />
             <Route path="/insert-code" element={<TextInput enterPressedHandler={gameCodeEntered} type="Game Code"/>} />
+            <Route path="/lobby" element={<Lobby />}/>
+            <Route path="/question" element={<Question />} />
         </Routes>
     );
 }
