@@ -18,13 +18,13 @@ def randNum():
     return random.randint(100_000, 1_000_000)
 
 
-@app.route("/startGame")
-def startGame():
+@app.route("/createGame")
+def createGame():
     player_id = randNum()
     game_id = randNum()
     try:
         with sqlite3.connect("database.db") as conn:
-            conn.cursor().execute(f"""INSERT INTO games (id, player0, currentPlayerIndex) VALUES ({game_id}, {player_id}, 1);""")
+            conn.cursor().execute(f"""INSERT INTO games (id, player0, currentPlayerIndex, gamePhase) VALUES ({game_id}, {player_id}, 1, "Lobby");""")
             conn.cursor().execute(f"""INSERT INTO players (id, name, game) VALUES ({player_id}, "{c('name')}", {game_id});""")
             conn.commit()
     except Exception as e:
@@ -42,9 +42,8 @@ def joinGame():
             if (output is None):
                 return "ERROR"
             playerIndex = output[11]
-            conn.cursor().execute(f"""INSERT INTO players (id, name, game) VALUES ({player_id}, "{c("name")}", {c("code")})""")
-            conn.cursor().execute(f"""UPDATE games SET player{playerIndex} = {player_id}, currentPlayerIndex = {playerIndex+1} WHERE id = {c("code")}""")
-            print(f"""UPDATE games SET player{playerIndex} = {player_id}, currentPlayerIndex = {playerIndex+1} WHERE id = {c("code")}""")
+            conn.cursor().execute(f"""INSERT INTO players (id, name, game) VALUES ({player_id}, "{c("name")}", {c("code")});""")
+            conn.cursor().execute(f"""UPDATE games SET player{playerIndex} = {player_id}, currentPlayerIndex = {playerIndex+1} WHERE id = {c("code")};""")
             conn.commit()
         except Exception as e:
             print(e)
@@ -60,10 +59,32 @@ def getLobby():
             output = res.fetchone()
             if (output is None):
                 return "ERROR"
-            print(output)
-            return output
+            if (output[12] == "Lobby"):
+                players = ""
+                for o in output[1:11]:
+                    if o == None:
+                        continue
+                    res = conn.cursor().execute(f"""SELECT name FROM players WHERE id = {o};""")
+                    players = players + " " + res.fetchone()[0]
+
+                conn.commit()
+                return players[1:]
+            else:
+                conn.commit()
+                return "Hi"
         except:
             return "ERROR"
+
+
+@app.route("/startGame")
+def startGame():
+    with sqlite3.connect("database.db") as conn:
+        try:
+            conn.cursor().execute(f"""UPDATE games SET gamePhase="KFALK" WHERE id = {c("code")};""")
+            conn.commit()
+        except Exception as e:
+            print("STart Gane ERROR: ", e)
+    return ""
 
 
 """s = CREATE TABLE IF NOT EXISTS tab (

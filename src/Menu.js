@@ -17,7 +17,7 @@ function Menu() {
     return <div className="Center">
         <div className="VerticalContainer">
             <button className="MenuItem" onClick={() => nav("/insert-code")}>Join Game</button>
-            <button className="MenuItem" onClick={() => nav("/insert-name")}>Start Game</button>
+            <button className="MenuItem" onClick={() => nav("/insert-name")}>Create Game</button>
         </div>
     </div>;
 }

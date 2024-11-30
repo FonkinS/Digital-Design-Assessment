@@ -15,13 +15,12 @@ async function callServer(functionName, parameters) {
     for (const [key, value] of Object.entries(parameters)) {
         url += String(key) + "=" + String(value) + "&";
     }
-    console.log(url);
     const response = await fetch(url);
     return response.text();
 }
 
-async function startGame(nav) {
-    const output = await callServer("startGame", {name: Cookies.get("name")});
+async function createGame(nav) {
+    const output = await callServer("createGame", {name: Cookies.get("name")});
     if (output === "ERROR") {
         alert("ERROR!");
         nav("/");
@@ -45,7 +44,6 @@ async function joinGame(nav) {
 
 
 function App() { 
-
     const nav = useNavigate();
     const gameCodeEntered = (code) => {
         Cookies.set("isAdmin", false);
@@ -55,7 +53,7 @@ function App() {
     const nameEntered = (name) => {
         Cookies.set("name", name);
         if (Cookies.get("isAdmin") === "true") {
-            startGame(nav);
+            createGame(nav);
         } else {
             joinGame(nav);
         }
@@ -65,7 +63,7 @@ function App() {
             <Route path="/" element={<Menu />} />
             <Route path="/insert-name" element={<TextInput enterPressedHandler={nameEntered} type="Name"/>} />
             <Route path="/insert-code" element={<TextInput enterPressedHandler={gameCodeEntered} type="Game Code"/>} />
-            <Route path="/lobby" element={<Lobby />}/>
+            <Route path="/lobby" element={<Lobby serverCallback={callServer}/>}/>
             <Route path="/question" element={<Question />} />
         </Routes>
     );
