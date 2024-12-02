@@ -25,24 +25,25 @@ function RenderLobbyPlayers({players}) {
     return arr;
 }
 
-async function getServerLobbyInfo(serverCallback, setPlayerData) {
+async function getServerLobbyInfo(serverCallback, setPlayerData, nav) {
     let data = await serverCallback("getLobby", {code: Cookies.get("gameCode")});
+    if (data === "Start Game!") {
+        nav("/question-preview");
+    }
     data = data.split(" ");
     setPlayerData(data);
 }
 
 /*https://iq.js.org/questions/react/how-to-update-a-component-every-second*/
 function Lobby({serverCallback}) {
-    console.log("yo");
     //const [callBack, setCallback] = useState(() => getServerLobbyInfo());
+    const nav = useNavigate();
     const [playerData, setPlayerData] = useState([]);
     useEffect(() => {
-        const interval = setInterval(() => getServerLobbyInfo(serverCallback,setPlayerData), 1000);
+        const interval = setInterval(() => getServerLobbyInfo(serverCallback,setPlayerData,nav), 1000);
         return () => clearInterval(interval);
       }, []);
 
-    //console.log(callBack);
-    //setInterval(() => getServerLobbyInfo(), 1000);
     return (<div>
         <div className="GameCode">Gamecode: {Cookies.get("gameCode")}</div>
         <div className="PlayersContainer">

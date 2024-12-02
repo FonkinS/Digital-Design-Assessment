@@ -6,8 +6,9 @@ import './App.css';
 
 import Menu from './Menu.js'
 import TextInput from './TextInput.js'
-import Question from './Question.js'
 import Lobby from './Lobby.js'
+import QuestionPreview from './QuestionPreview.js'
+import Question from './Question.js'
 
 
 async function callServer(functionName, parameters) {
@@ -64,6 +65,7 @@ function App() {
             <Route path="/insert-name" element={<TextInput enterPressedHandler={nameEntered} type="Name"/>} />
             <Route path="/insert-code" element={<TextInput enterPressedHandler={gameCodeEntered} type="Game Code"/>} />
             <Route path="/lobby" element={<Lobby serverCallback={callServer}/>}/>
+            <Route path="/question-preview" element={<QuestionPreview serverCallback={callServer}/>} />
             <Route path="/question" element={<Question />} />
         </Routes>
     );

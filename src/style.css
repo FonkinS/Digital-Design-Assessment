@@ -115,10 +115,28 @@
     background-color: #FF8C41;
 }
 
+.Mascot {
+    width: 512px;
+    position: absolute;
+    bottom:0px;
+    right:0px;
+    margin:25px;
+}
+
+.QuestionPreview {
+    align:center;
+    max-width:100%;
+    background-color:#D1b490;
+    border-radius: 30px;
+    padding:50px;
+    margin:25px;
+    min-height:50px;
+}
+
 /*https://stackoverflow.com/questions/5721904/make-body-fill-entire-screen*/
 html, body {
     margin: 0;
-    height: 100%;
+    max-height: 100%;
     background-color: #8AA8A1;
     font-family: 'Trebuchet MS';
     font-size: 24pt;
