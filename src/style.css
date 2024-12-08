@@ -3,7 +3,7 @@
 }
 /*https://www.w3schools.com/csS/css_align.asp*/
 .Center {
-    min-height: 100%;
+    height: 100%;
     width: 100%;
     margin: 0;
     display: flex;
@@ -124,6 +124,7 @@
 }
 
 .QuestionPreview {
+    text-align:center;
     align:center;
     max-width:100%;
     background-color:#D1b490;
@@ -133,10 +134,83 @@
     min-height:50px;
 }
 
+.AnswerContainer {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-content:stretch;
+    max-width:100%;
+    min-width:100%;
+}
+
+
+.Answer {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    min-width:40%;
+    padding:25px;
+    margin: 25px;
+    border-radius: 30px;
+    min-height: 200px;
+    border: solid 5px #CBCBD4;
+}
+
+.Answer:hover {
+    border: solid 5px black;
+}
+
+.AnswerCol0 {
+    background-color: #CBCBD4;
+    border: solid 5px #CBCBD4;
+}
+.AnswerCol1 {
+    background-color: #885A89;
+    border: solid 5px #885A89;
+}
+.AnswerCol2 {
+    background-color: #EE7B30;
+    border: solid 5px #EE7B30;
+}
+.AnswerCol3 {
+    background-color: #D1B490;
+    border: solid 5px #D1B490;
+}
+
+.score {
+    margin:auto;
+    width:30%;
+    border-radius:30px;
+    background-color: #D1B490;
+    text-align: center;
+}
+
+
+.QuestionFinish {
+    margin: 50px;
+}
+
+
+.PodiumTable {
+    max-width:100%;
+    margin-top: 100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.PodiumCell {
+    text-align:center;
+    margin:50px;
+    padding: 0px 50px 10px 50px;
+}
+
 /*https://stackoverflow.com/questions/5721904/make-body-fill-entire-screen*/
 html, body {
     margin: 0;
     max-height: 100%;
+    min-height: 100%;
     background-color: #8AA8A1;
     font-family: 'Trebuchet MS';
     font-size: 24pt;

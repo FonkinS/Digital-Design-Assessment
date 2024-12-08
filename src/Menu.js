@@ -9,6 +9,7 @@ function reset() {
     Cookies.set("player_id", 0);
     Cookies.set("gameCode", 0);
     Cookies.set("isAdmin", true);
+    Cookies.set("score", 0);
 }
 
 function Menu() {

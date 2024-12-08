@@ -8,6 +8,9 @@ function TextInput({enterPressedHandler, type}) {
         event.target.value = event.target.value.replace(" ", "").replace("'", "").replace("\"", "");
         event.target.value = event.target.value.substring(0,10)
         if (event.key === "Enter") {
+            if (event.target.value == "") {
+                event.target.value = "Anonymous";
+            }
             const value = event.target.value;
             event.target.value = "";
             enterPressedHandler(value);

@@ -28,6 +28,7 @@ function RenderLobbyPlayers({players}) {
 async function getServerLobbyInfo(serverCallback, setPlayerData, nav) {
     let data = await serverCallback("getLobby", {code: Cookies.get("gameCode")});
     if (data === "Start Game!") {
+        Cookies.set("score", 0);
         nav("/question-preview");
     }
     data = data.split(" ");

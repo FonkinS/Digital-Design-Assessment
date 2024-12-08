@@ -9,6 +9,8 @@ import TextInput from './TextInput.js'
 import Lobby from './Lobby.js'
 import QuestionPreview from './QuestionPreview.js'
 import Question from './Question.js'
+import QuestionFinish from './QuestionFinish.js'
+import GameOver from './GameOver.js'
 
 
 async function callServer(functionName, parameters) {
@@ -66,7 +68,9 @@ function App() {
             <Route path="/insert-code" element={<TextInput enterPressedHandler={gameCodeEntered} type="Game Code"/>} />
             <Route path="/lobby" element={<Lobby serverCallback={callServer}/>}/>
             <Route path="/question-preview" element={<QuestionPreview serverCallback={callServer}/>} />
-            <Route path="/question" element={<Question />} />
+            <Route path="/question" element={<Question serverCallback={callServer}/>} />
+            <Route path="/question-finish" element={<QuestionFinish serverCallback={callServer}/>} />
+            <Route path="/game-over" element={<GameOver serverCallback={callServer}/>} />
         </Routes>
     );
 }
