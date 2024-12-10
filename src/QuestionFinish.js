@@ -8,6 +8,7 @@ import './App.css';
 async function getEveryoneFinished(serverCallback, nav) {
     let data = await serverCallback("checkEveryoneFinished", {code: Cookies.get("gameCode")});
     if (data == "True") {
+        Cookies.set("lastexplanation", Cookies.get("explanation"));
         nav("/question-preview")
     }
 }
@@ -21,7 +22,7 @@ function QuestionFinish({serverCallback}) {
       }, []);
 
     return (<div className="Center QuestionFinish">
-        <div>Waiting for everyone to finish...</div>
+        <div>{Cookies.get("explanation")}</div>
     </div>);
 } 
 

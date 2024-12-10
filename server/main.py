@@ -5,7 +5,7 @@ import sqlite3
 import random
 from datetime import datetime
 
-MAX_QUESTION = 4
+MAX_QUESTION = 8
 
 #import sqlite3
 
@@ -101,7 +101,7 @@ def getQuestion():
             if (questionInt == None):
                 print("Game Fetch Error on question Fetch!")
                 return "ERROR"
-            if int(questionInt[0]) >= MAX_QUESTION:
+            if int(questionInt[0]) > MAX_QUESTION:
                 return "FINISHED|"
             res = conn.cursor().execute(f"""SELECT * FROM questions WHERE id = {questionInt[0]}""")
             question = res.fetchone()
@@ -110,6 +110,7 @@ def getQuestion():
                 print(" question fetch error on question Fetch!")
                 return "ERROR"
             question = str(question).replace("(", "").replace(")", "").replace(", ", "|").replace("'", "") + "|" + str(time)
+            print("QUESTION: ", question)
             return question
     except Exception as e:
         print(e)
@@ -171,7 +172,7 @@ def getPodium():
                 if p == None:
                     break;
                 s = conn.cursor().execute(f"""SELECT name, score FROM players WHERE id = {p}""").fetchone();
-                scores.append(s)
+                scores.append((s[1], s[0]))
             conn.commit()
             scores.sort()
             scores.reverse()

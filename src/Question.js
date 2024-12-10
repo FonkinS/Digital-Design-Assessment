@@ -18,16 +18,19 @@ function Question({serverCallback}) {
     let answers = [Cookies.get("correctanswer"), Cookies.get("wronganswer1"), Cookies.get("wronganswer2"), Cookies.get("wronganswer3")];
     answers.sort(() => Math.random()-0.5);
     let timer;
+    let start_time;
 
     const answerSelectHandler = (answerId) => {
         if (answers[answerId] === Cookies.get("correctanswer")) {
-            Cookies.set("score", parseInt(Cookies.get("score"))+10)
+            let current_time = new Date().getTime();
+            Cookies.set("score", parseInt(Cookies.get("score"))+(10000 - (current_time - start_time)))
         }
         NextQuestion(nav, serverCallback, timer);
     };
 
 
     useEffect(() => {
+        start_time = new Date().getTime();
         timer = setTimeout(() => NextQuestion(nav, serverCallback, timer), 10000);
     });
 

@@ -32,7 +32,7 @@ function Podium({serverCallback}) {
     }, []);
     let arr = [];
     for (let i = 0; i < podiumData.length; i+=2) {
-        arr.push(<PodiumRow key={i} id={i / 2+1} name={podiumData[i]} score={podiumData[i+1]}/>)
+        arr.push(<PodiumRow key={i} id={i / 2+1} name={podiumData[i+1]} score={podiumData[i]}/>)
     }
     return <table className="PodiumTable"><tbody>{arr}</tbody></table>;
 }

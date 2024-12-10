@@ -21,13 +21,15 @@ async function getQuestion(serverCallback, setQuestion, nav) {
         nav("/game-over");
         return;
     }
+    console.log(data);
     Cookies.set("question", data[1]);
     Cookies.set("correctanswer", data[2]);
     Cookies.set("wronganswer1", data[3]);
     Cookies.set("wronganswer2", data[4]);
     Cookies.set("wronganswer3", data[5]);
+    Cookies.set("explanation", data[6]);
     setQuestion(data[1]);
-    let finaltime = Number(Number(data[6]).toPrecision(10)) * 1000;
+    let finaltime = Number(Number(data[7]).toPrecision(10)) * 1000;
     let currenttime = Number(Number(new Date().getTime()).toPrecision(10));
     console.log(currenttime, finaltime);
     setTimeout(() => gotoQuestion(nav), (finaltime-currenttime));
